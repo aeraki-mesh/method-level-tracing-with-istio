@@ -1,2 +1,2 @@
-mvn install
-sudo docker build ./ -t zhaohuabing/istio-opentracing-demo-kafka-consumer:kafka-opentracing
+mvn install -DskipTests
+sudo docker build ./ -t aeraki/istio-opentracing-demo-kafka-consumer:latest

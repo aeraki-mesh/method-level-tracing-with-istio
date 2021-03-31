@@ -63,169 +63,151 @@ spec:
   selector:
     app: notification
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: eshop
   template:
     metadata:
       labels:
         app: eshop
-        version: v1
     spec:
       containers:
-      - name: eshop
-        image: zhaohuabing/istio-opentracing-demo:kafka-opentracing
-        ports:
-        - containerPort: 8080
-        env:
-          - name: JAEGER_ENDPOINT
-            value: "http://jaeger-collector.istio-system:14268/api/traces"
-          - name: JAEGER_PROPAGATION
-            value: "b3"
-          - name: JAEGER_TRACEID_128BIT
-            value: "true"
-          - name: KAFKA_BOOTSTRAP_SERVERS
-            value: "192.168.89.192:9092"
+        - name: eshop
+          image: aeraki/istio-opentracing-demo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ZIPKIN_ENDPOINT
+              value: "http://zipkin.istio-system:9411/api/v2/spans"
+            - name: KAFKA_BOOTSTRAP_SERVERS
+              value: "kafka-service:9092"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inventory-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: inventory
   template:
     metadata:
       labels:
         app: inventory
-        version: v1
     spec:
       containers:
-      - name: inventory
-        image: zhaohuabing/istio-opentracing-demo:kafka-opentracing
-        ports:
-        - containerPort: 8080
-        env:
-          - name: JAEGER_ENDPOINT
-            value: "http://jaeger-collector.istio-system:14268/api/traces"
-          - name: JAEGER_PROPAGATION
-            value: "b3"
-          - name: JAEGER_TRACEID_128BIT
-            value: "true"
+        - name: inventory
+          image: aeraki/istio-opentracing-demo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ZIPKIN_ENDPOINT
+              value: "http://zipkin.istio-system:9411/api/v2/spans"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: billing-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: billing
   template:
     metadata:
       labels:
         app: billing
-        version: v1
     spec:
       containers:
-      - name: billing
-        image: zhaohuabing/istio-opentracing-demo:kafka-opentracing
-        ports:
-        - containerPort: 8080
-        env:
-          - name: JAEGER_ENDPOINT
-            value: "http://jaeger-collector.istio-system:14268/api/traces"
-          - name: JAEGER_PROPAGATION
-            value: "b3"
-          - name: JAEGER_TRACEID_128BIT
-            value: "true"
+        - name: billing
+          image: aeraki/istio-opentracing-demo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ZIPKIN_ENDPOINT
+              value: "http://zipkin.istio-system:9411/api/v2/spans"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: delivery-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: delivery
   template:
     metadata:
       labels:
         app: delivery
-        version: v1
     spec:
       containers:
-      - name: delivery
-        image: zhaohuabing/istio-opentracing-demo:kafka-opentracing
-        ports:
-        - containerPort: 8080
-        env:
-          - name: JAEGER_ENDPOINT
-            value: "http://jaeger-collector.istio-system:14268/api/traces"
-          - name: JAEGER_PROPAGATION
-            value: "b3"
-          - name: JAEGER_TRACEID_128BIT
-            value: "true"
+        - name: delivery
+          image: aeraki/istio-opentracing-demo:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ZIPKIN_ENDPOINT
+              value: "http://zipkin.istio-system:9411/api/v2/spans"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: notification-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: notification
   template:
     metadata:
       labels:
         app: notification
-        version: v1
     spec:
       containers:
       - name: notification
-        image: zhaohuabing/istio-opentracing-demo:kafka-opentracing
+        image: aeraki/istio-opentracing-demo:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
-          - name: JAEGER_ENDPOINT
-            value: "http://jaeger-collector.istio-system:14268/api/traces"
-          - name: JAEGER_PROPAGATION
-            value: "b3"
-          - name: JAEGER_TRACEID_128BIT
-            value: "true"
+          - name: ZIPKIN_ENDPOINT
+            value: "http://zipkin.istio-system:9411/api/v2/spans"
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kafka-consumer-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-consumer
   template:
     metadata:
       labels:
         app: kafka-consumer
-        version: v1
     spec:
       containers:
       - name: kafka-consumer
-        image: zhaohuabing/istio-opentracing-demo-kafka-consumer:kafka-opentracing
+        image: aeraki/istio-opentracing-demo-kafka-consumer:latest
+        imagePullPolicy: Always
         env:
-          - name: JAEGER_ENDPOINT
-            value: "http://jaeger-collector.istio-system:14268/api/traces"
-          - name: JAEGER_PROPAGATION
-            value: "b3"
-          - name: JAEGER_TRACEID_128BIT
-            value: "true"
+          - name: ZIPKIN_ENDPOINT
+            value: "http://zipkin.istio-system:9411/api/v2/spans"
           - name: KAFKA_BOOTSTRAP_SERVERS
-            value: "192.168.89.192:9092"
+            value: "kafka-service:9092"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
