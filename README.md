@@ -11,7 +11,7 @@ kubectl apply -f istio-opentracing-demo/k8s/eshop.yaml
 3. Open this url in the browser to trigger the eshop service http://${INGRESS_EXTERNAL_IP}/checkout
 4. Open TCM UI in the browser to view the tracing
 
-![](https://raw.githubusercontent.com/zhaohuabing/istio-opentracing-demo/master/screenshot/istio-tracing-opentracing-kafka.jpg)
+![](screenshot/istio-tracing-opentracing-kafka.png)
 
 ### Understanding what happened under the hood
 * The eshop demo uses opentracing and Zipkin for distributed tracing instrumentation. All the REST calls are automatically traced by opentracing.
