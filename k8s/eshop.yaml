@@ -50,19 +50,19 @@ spec:
   selector:
     app: delivery
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: eshop-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: eshop
   template:
     metadata:
       labels:
         app: eshop
-        version: v1
     spec:
       containers:
       - name: eshop
@@ -70,19 +70,19 @@ spec:
         ports:
         - containerPort: 8080
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: inventory-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: inventory
   template:
     metadata:
       labels:
         app: inventory
-        version: v1
     spec:
       containers:
       - name: inventory
@@ -90,19 +90,19 @@ spec:
         ports:
         - containerPort: 8080        
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: billing-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: billing
   template:
     metadata:
       labels:
         app: billing
-        version: v1
     spec:
       containers:
       - name: billing
@@ -110,19 +110,19 @@ spec:
         ports:
         - containerPort: 8080
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: delivery-v1
-  labels:
-    version: v1
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: delivery
   template:
     metadata:
       labels:
         app: delivery
-        version: v1
     spec:
       containers:
       - name: delivery
