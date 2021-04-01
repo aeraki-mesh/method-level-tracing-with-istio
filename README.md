@@ -1,15 +1,13 @@
 # Use opentracing with Istio for tracing propagation and method-level tracing inside a service
 
 ### How to run this demo?
-1. deploy kafka 
-2. deploy eshop demo
-```
-git clone https://github.com/aeraki-framework/method-level-tracing-with-istio.git
-kubectl apply -f istio-opentracing-demo/k8s/kafka.yaml
-kubectl apply -f istio-opentracing-demo/k8s/eshop.yaml
-```
-3. Open this url in the browser to trigger the eshop service http://${INGRESS_EXTERNAL_IP}/checkout
-4. Open TCM UI in the browser to view the tracing
+1. Create a mesh instance at [tencent clould mesh](https://console.cloud.tencent.com/tke2/mesh?rid=5).
+1. Create a [TKE](https://console.cloud.tencent.com/tke2/cluster/startUp) cluster, and add this cluster into the mesh that you just created.
+1. Download this repository: ```git clone https://github.com/aeraki-framework/method-level-tracing-with-istio.git```
+1. deploy kafka into the TKE cluster: ```kubectl apply -f istio-opentracing-demo/k8s/kafka.yaml```
+1. deploy eshop demo into the TKE cluster: ```kubectl apply -f istio-opentracing-demo/k8s/eshop.yaml```
+1. Open this url in the browser to trigger the eshop service: http://${INGRESS_EXTERNAL_IP}/checkout
+1. Open TCM UI in the browser to view the tracing.
 
 ![](screenshot/istio-tracing-opentracing-kafka.png)
 
