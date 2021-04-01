@@ -1,3 +1,5 @@
+This demo show you how to leverage OpenTracing and Spring to propagate trace context across process boundaries, achieve method-level tracing and enable tracing for kafka messaging in an Istio service mesh.
+
 # Use opentracing with Istio for tracing propagation and method-level tracing inside a service
 
 ### How to run this demo?
